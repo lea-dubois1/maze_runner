@@ -20,6 +20,15 @@ public class BaseGenerator {
         for (int i = 0; i < num; i++) {
             tilesList.add(tile);
         }
+        
+        int i = 0, j = 0;
+        
+        while (j != )
+            while (i != 3) {
+                System.out.print(tilesList.get(0).get(i));
+                i++;
+            }
+            i = 0;
 
 //        int l = 0;
 //
