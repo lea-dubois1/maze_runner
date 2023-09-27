@@ -16,7 +16,7 @@ public class Main {
         catch (NumberFormatException e) {
             System.out.println("Erreur : Veuillez fournir une largeur et une hauteur valides supérieurs à 5");
         }
-        finally {
+        catch (Exception ex) {
             System.out.println("Erreur inattendue lors de la génération du labyrinthe. Veuillez réessayer.");
         }
 

@@ -8,58 +8,41 @@ public class BaseGenerator {
     protected int hauteur;
 
     public void getBaseTiles() {
-        int num = this.hauteur * this.largeur;
-
-        ArrayList<ArrayList<String>> tilesList = new ArrayList<ArrayList<String>>(num);
-
-        ArrayList<String> tile = new ArrayList<String>(9);
-        tile.add("#"); tile.add("#"); tile.add("#");
-        tile.add("#"); tile.add("."); tile.add("#");
-        tile.add("#"); tile.add("#"); tile.add("#");
+        int num = hauteur * largeur;
+        String[][] tilesTab = new String[num][9];
 
         for (int i = 0; i < num; i++) {
-            tilesList.add(tile);
-        }
-        
-        int i = 0, j = 0;
-        
-        while (j != )
-            while (i != 3) {
-                System.out.print(tilesList.get(0).get(i));
-                i++;
+            for (int j = 0; j < 9; j++) {
+                if (j == 4) {
+                    tilesTab[i][j] = Integer.toString(i);
+                } else {
+                    tilesTab[i][j] = "#";
+                }
             }
-            i = 0;
+        }
 
-//        int l = 0;
-//
-////        for (int i = 1; i <= this.hauteur; i++) {               // Créer les lignes
-//            for (int j = 0; j < this.largeur; j++) {            // Créer les colonnes pour chaque ligne
-//                for (int m = 0; m < num; m++) {
-//                    if(l >= 9) {
-//                        l = 0;
-//                    }
-//                    for (int k = l; k < l+3; k++) {
-//                        System.out.print(tilesList.get(m).get(k));
-////                        System.out.println("m : " + m + ", k : " + k + ", l : " + l + ", j : " + j);
-//                    }
-////                    System.out.println("l tour " + i + " = " + l);
-//                }
-//                l += 3;
-//
-//                    System.out.println();
-//            }
+        String ligne1 = "";
+        String ligne2 = "";
+        String ligne3 = "";
 
-//            System.out.println();
-//        }
-
-//        for (int i = 0; i < tilesList.size(); i++) {                // Pour chaque tile
-//            for (int j = 0; j < tilesList.get(i).size(); j++) {     // j = elem de la tile
-//                System.out.print(tilesList.get(i).get(j) + " ");
-//                if ((j+1)%3 == 0) {
-//                    System.out.println();
-//                }
-//            }
-//            System.out.println();
-//        }
+        for (int j = 0; j < tilesTab.length; j++) {
+            for (int i = 0; i < tilesTab[j].length; i++) {
+                if (i <= 2) {
+                    ligne1 += tilesTab[j][i];
+                } else if (i <= 5) {
+                    ligne2 += tilesTab[j][i];
+                } else if (i <= 8) {
+                    ligne3 += tilesTab[j][i];
+                }
+            }
+            if ((j+1) % largeur == 0) {
+                System.out.println("ligne 1 : " + ligne1);
+                System.out.println("ligne 2 : " + ligne2);
+                System.out.println("ligne 3 : " + ligne3);
+                ligne1 = "";
+                ligne2 = "";
+                ligne3 = "";
+            }
+        }
     }
 }
