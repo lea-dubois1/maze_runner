@@ -31,6 +31,8 @@ public class Main {
             System.out.println("Erreur : Veuillez fournir un type de labyrinthe et une méthode de génération valides.");
         } else if (!Objects.equals(type, "imperfect") && !Objects.equals(type, "perfect") || !Objects.equals(methode, "simple") && !Objects.equals(methode, "graph") && !Objects.equals(methode, "optimized")) {
             System.out.println("Erreur : Veuillez fournir un type de labyrinthe et une méthode de génération valides.");
+        } else {
+            System.out.println("Erreur inattendue lors de la génération du labyrinthe. Veuillez réessayer.");
         }
     }
 }
