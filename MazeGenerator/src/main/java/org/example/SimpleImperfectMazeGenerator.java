@@ -99,10 +99,6 @@ public class SimpleImperfectMazeGenerator implements MazeGenerator {
                         break;
                     }
 
-//                    System.out.println("ok0");
-//                    System.out.println(Arrays.toString(otherTile));
-//                    System.out.println(Arrays.toString(randomTile));
-
                     finished = changeNums(otherTile, randomTile);          // Change le plus petit num par le plus grand et check si le maze est finis
                 }
                 case 1 -> {         // EAST
@@ -126,10 +122,6 @@ public class SimpleImperfectMazeGenerator implements MazeGenerator {
                         break;
                     }
 
-//                    System.out.println("ok1");
-//                    System.out.println(Arrays.toString(otherTile));
-//                    System.out.println(Arrays.toString(randomTile));
-
                     finished = changeNums(otherTile, randomTile);          // Change le plus petit num par le plus grand et check si le maze est finis
                 }
                 case 2 -> {         // SOUTH
@@ -146,10 +138,6 @@ public class SimpleImperfectMazeGenerator implements MazeGenerator {
                     } else {
                         break;
                     }
-
-//                    System.out.println("ok2");
-//                    System.out.println(Arrays.toString(otherTile));
-//                    System.out.println(Arrays.toString(randomTile));
 
                     finished = changeNums(otherTile, randomTile);          // Change le plus petit num par le plus grand et check si le maze est finis
                 }
@@ -171,10 +159,6 @@ public class SimpleImperfectMazeGenerator implements MazeGenerator {
                         break;
                     }
 
-//                    System.out.println("ok3");
-//                    System.out.println(Arrays.toString(otherTile));
-//                    System.out.println(Arrays.toString(randomTile));
-
                     finished = changeNums(otherTile, randomTile);          // Change le plus petit num par le plus grand et check si le maze est finis
                 }
                 default -> throw new IllegalStateException("Unexpected value: " + randomDirection);
@@ -193,27 +177,27 @@ public class SimpleImperfectMazeGenerator implements MazeGenerator {
 
     public void displayMaze(String[][] tab) {
 
-        String ligne1 = "";
-        String ligne2 = "";
-        String ligne3 = "";
+        StringBuilder ligne1 = new StringBuilder();
+        StringBuilder ligne2 = new StringBuilder();
+        StringBuilder ligne3 = new StringBuilder();
 
         for (int j = 0; j < tab.length; j++) {
             for (int i = 0; i < tab[j].length; i++) {
                 if (i <= 2) {
-                    ligne1 += tab[j][i];
+                    ligne1.append(tab[j][i]);
                 } else if (i <= 5) {
-                    ligne2 += tab[j][i];
+                    ligne2.append(tab[j][i]);
                 } else if (i <= 8) {
-                    ligne3 += tab[j][i];
+                    ligne3.append(tab[j][i]);
                 }
             }
             if ((j+1) % width == 0) {
                 System.out.println(ligne1);
                 System.out.println(ligne2);
                 System.out.println(ligne3);
-                ligne1 = "";
-                ligne2 = "";
-                ligne3 = "";
+                ligne1 = new StringBuilder();
+                ligne2 = new StringBuilder();
+                ligne3 = new StringBuilder();
             }
         }
     }
