@@ -1,6 +1,9 @@
 package org.example;
 
-public class SimpleImperfectMazeGenerator extends BaseGenerator implements MazeGenerator {
+import java.util.Arrays;
+import java.util.Objects;
+
+public class SimpleImperfectMazeGenerator implements MazeGenerator {
 
     private int width;
     private int height;
@@ -35,82 +38,156 @@ public class SimpleImperfectMazeGenerator extends BaseGenerator implements MazeG
         }
     }
 
+    public int getRandomNum(int limit) {
+        double randomDouble = Math.random();
+        return (int) (randomDouble * limit);
+    }
+
+    public boolean changeNums(String[] otherTile, String[] randomTile) {
+
+        String changedNum, newNum;
+
+        if (Integer.parseInt(otherTile[4]) > Integer.parseInt(randomTile[4])) {         // Vérifier lequel est le plus petit et lequel est le plus grand
+            changedNum = otherTile[4];
+            newNum = randomTile[4];
+        } else {
+            changedNum = randomTile[4];
+            newNum = otherTile[4];
+        }
+
+        int numOfZeros = 0;
+
+        for (String[] oneTile : tilesTab) {
+            if (Objects.equals(oneTile[4], changedNum)) {         // Changer toutes les cases qui ont le plus grand nombre par le plus petit
+                oneTile[4] = newNum;
+            }
+            if (Objects.equals(oneTile[4], "0")) {                // Compter les tuiles avec un zero
+                numOfZeros++;
+            }
+        }
+
+        return numOfZeros == num;               // Si toutes les tuiles sont en 0, le labyrinthe est terminé
+    }
+
     public void breakThings() {
 
-        // Faire un tab des num de 0 à num-1 et enlever le num qui est remplacé à chaque fois
+        boolean finished = false;
 
-        // Get random tile
+        while (!finished) {
+            int randomIndex = getRandomNum(num);
+            String[] randomTile = tilesTab[randomIndex];
 
-        double randomDouble = Math.random();
-        int randomIndex = (int) (randomDouble * num);
-        String[] randomTile = tilesTab[randomIndex];
-        System.out.println(randomIndex);
+            int randomDirection = getRandomNum(4);
 
-        // Get random direction
+            String[] otherTile;
 
-        double randomDoubleAgain = Math.random();
-        int randomNumber = (int) (randomDoubleAgain * 4);
-        String[] tileLink;
-        System.out.println(randomNumber);
+            switch (randomDirection) {
+                case 0 -> {         // NORTH
 
-        switch (randomNumber) {
-            case 0:
-                // north
-                // si randomTile est la dernière ou la première de la ligne, break
-                // check si la tile tileLink a le même num que randomTile et changer le num de tileLink quand on a cassé le mur
-                System.out.println("ok0");
-                try {
-                    tileLink = tilesTab[randomIndex - width];
+                    try {                                               // Vérifier si la case cherchée existe
+                        otherTile = tilesTab[randomIndex - width];
+                    }
+                    catch (ArrayIndexOutOfBoundsException e) {
+                        break;
+                    }
+
+                    if (!Objects.equals(otherTile[4], randomTile[4])) {        // Si les num sont différents
+
+                        randomTile[1] = ".";                    // Remplacer les murs par des points
+                        otherTile[7] = ".";
+                    } else {
+                        break;
+                    }
+
+//                    System.out.println("ok0");
+//                    System.out.println(Arrays.toString(otherTile));
+//                    System.out.println(Arrays.toString(randomTile));
+
+                    finished = changeNums(otherTile, randomTile);          // Change le plus petit num par le plus grand et check si le maze est finis
                 }
-                catch (ArrayIndexOutOfBoundsException e) {
-                    break;
-                }
+                case 1 -> {         // EAST
 
-                randomTile[1] = ".";
-                tileLink[7] = ".";
-                break;
+                    try {
+                        otherTile = tilesTab[randomIndex + 1];
+                    }
+                    catch (ArrayIndexOutOfBoundsException e) {
+                        break;
+                    }
 
-            case 1:
-                // east
-                System.out.println("ok1");
-                try {
-                    tileLink = tilesTab[randomIndex + 1];
-                }
-                catch (ArrayIndexOutOfBoundsException e) {
-                    break;
-                }
+                    if ((randomIndex + 1) % width == 0) {               // Si le prochain tile est sur la prochaine ligne, recommencer
+                        break;
+                    }
 
-                randomTile[5] = ".";
-                tileLink[3] = ".";
-                break;
+                    if (!Objects.equals(otherTile[4], randomTile[4])) {        // Si les num sont différents
 
-            case 2:
-                // south
-                System.out.println("ok2");
-                try {
-                    tileLink = tilesTab[randomIndex + width];
-                }
-                catch (ArrayIndexOutOfBoundsException e) {
-                    break;
-                }
+                        randomTile[5] = ".";                    // Remplacer les murs par des points
+                        otherTile[3] = ".";
+                    } else {
+                        break;
+                    }
 
-                randomTile[7] = ".";
-                tileLink[1] = ".";
-                break;
+//                    System.out.println("ok1");
+//                    System.out.println(Arrays.toString(otherTile));
+//                    System.out.println(Arrays.toString(randomTile));
 
-            case 3:
-                // west
-                System.out.println("ok3");
-                try {
-                    tileLink = tilesTab[randomIndex - 1];
+                    finished = changeNums(otherTile, randomTile);          // Change le plus petit num par le plus grand et check si le maze est finis
                 }
-                catch (ArrayIndexOutOfBoundsException e) {
-                    break;
-                }
+                case 2 -> {         // SOUTH
 
-                randomTile[3] = ".";
-                tileLink[5] = ".";
-                break;
+                    try {
+                        otherTile = tilesTab[randomIndex + width];
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        break;
+                    }
+
+                    if (!Objects.equals(otherTile[4], randomTile[4])) {        // Si les num sont différents
+                        randomTile[7] = ".";
+                        otherTile[1] = ".";
+                    } else {
+                        break;
+                    }
+
+//                    System.out.println("ok2");
+//                    System.out.println(Arrays.toString(otherTile));
+//                    System.out.println(Arrays.toString(randomTile));
+
+                    finished = changeNums(otherTile, randomTile);          // Change le plus petit num par le plus grand et check si le maze est finis
+                }
+                case 3 -> {         // WEST
+
+                    try {
+                        otherTile = tilesTab[randomIndex - 1];
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        break;
+                    }
+                    if ((randomIndex) % width == 0) {
+                        break;
+                    }
+
+                    if (!Objects.equals(otherTile[4], randomTile[4])) {        // Si les num sont différents
+                        randomTile[3] = ".";
+                        otherTile[5] = ".";
+                    } else {
+                        break;
+                    }
+
+//                    System.out.println("ok3");
+//                    System.out.println(Arrays.toString(otherTile));
+//                    System.out.println(Arrays.toString(randomTile));
+
+                    finished = changeNums(otherTile, randomTile);          // Change le plus petit num par le plus grand et check si le maze est finis
+                }
+                default -> throw new IllegalStateException("Unexpected value: " + randomDirection);
+            }
+
+            if (finished) {
+                for (String[] oneTile : tilesTab) {
+                    oneTile[4] = ".";
+                    tilesTab[0][1] = ".";
+                    tilesTab[num - 1][7] = ".";
+                }
+            }
+
         }
     }
 
