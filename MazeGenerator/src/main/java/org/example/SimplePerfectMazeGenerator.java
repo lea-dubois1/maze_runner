@@ -11,7 +11,7 @@ public class SimplePerfectMazeGenerator extends Maze implements MazeGenerator {
     public void getMaze() {
         getBaseTiles();
         breakThings();
-        displayMaze(tilesTab);
+        displayMaze(maze);
     }
 
     public void breakThings() {
@@ -20,7 +20,7 @@ public class SimplePerfectMazeGenerator extends Maze implements MazeGenerator {
 
         while (!finished) {
             int randomIndex = getRandomNum(num);
-            String[] randomTile = tilesTab[randomIndex];
+            String[] randomTile = maze[randomIndex];
 
             int randomDirection = getRandomNum(4);
 
@@ -30,7 +30,7 @@ public class SimplePerfectMazeGenerator extends Maze implements MazeGenerator {
                 case 0 -> {         // NORTH
 
                     try {                                               // Vérifie si la case cherchée existe
-                        otherTile = tilesTab[randomIndex - width];
+                        otherTile = maze[randomIndex - width];
                     }
                     catch (ArrayIndexOutOfBoundsException e) {
                         break;
@@ -49,7 +49,7 @@ public class SimplePerfectMazeGenerator extends Maze implements MazeGenerator {
                 case 1 -> {         // EAST
 
                     try {
-                        otherTile = tilesTab[randomIndex + 1];
+                        otherTile = maze[randomIndex + 1];
                     }
                     catch (ArrayIndexOutOfBoundsException e) {
                         break;
@@ -72,7 +72,7 @@ public class SimplePerfectMazeGenerator extends Maze implements MazeGenerator {
                 case 2 -> {         // SOUTH
 
                     try {
-                        otherTile = tilesTab[randomIndex + width];
+                        otherTile = maze[randomIndex + width];
                     } catch (ArrayIndexOutOfBoundsException e) {
                         break;
                     }
@@ -89,7 +89,7 @@ public class SimplePerfectMazeGenerator extends Maze implements MazeGenerator {
                 case 3 -> {         // WEST
 
                     try {
-                        otherTile = tilesTab[randomIndex - 1];
+                        otherTile = maze[randomIndex - 1];
                     } catch (ArrayIndexOutOfBoundsException e) {
                         break;
                     }
@@ -110,13 +110,12 @@ public class SimplePerfectMazeGenerator extends Maze implements MazeGenerator {
             }
 
             if (finished) {
-                for (String[] oneTile : tilesTab) {
+                for (String[] oneTile : maze) {
                     oneTile[4] = ".";
-                    tilesTab[0][1] = ".";
-                    tilesTab[num - 1][7] = ".";
+                    maze[0][1] = ".";
+                    maze[num - 1][7] = ".";
                 }
             }
-
         }
     }
 }

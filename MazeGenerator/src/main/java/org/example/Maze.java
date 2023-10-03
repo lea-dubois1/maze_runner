@@ -6,7 +6,7 @@ public class Maze {
     protected final int width;
     protected final int num;
     protected final int height;
-    protected String[][] tilesTab;
+    protected String[][] maze;
 
     Maze(int inputWidth, int inputHeight) {
         width = inputWidth;
@@ -16,14 +16,14 @@ public class Maze {
 
     public void getBaseTiles() {
 
-        tilesTab = new String[num][9];
+        maze = new String[num][9];
 
         for (int i = 0; i < num; i++) {
             for (int j = 0; j < 9; j++) {
                 if (j == 4) {
-                    tilesTab[i][j] = Integer.toString(i);
+                    maze[i][j] = Integer.toString(i);
                 } else {
-                    tilesTab[i][j] = "#";
+                    maze[i][j] = "#";
                 }
             }
         }
@@ -48,7 +48,7 @@ public class Maze {
 
         int numOfZeros = 0;
 
-        for (String[] oneTile : tilesTab) {
+        for (String[] oneTile : maze) {
             if (Objects.equals(oneTile[4], changedNum)) {         // Changer toutes les cases qui ont le plus grand nombre par le plus petit
                 oneTile[4] = newNum;
             }

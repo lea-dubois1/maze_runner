@@ -9,15 +9,17 @@ public class Main {
         String type = args[2];
         String methode = args[3];
 
+        String error = "";
+
         try {
             largeur = Integer.parseInt(args[0]);
             hauteur = Integer.parseInt(args[1]);
         }
         catch (NumberFormatException e) {
-            System.out.println("Erreur : Veuillez fournir une largeur et une hauteur valides supérieurs à 5. Utilisation : java -jar MazeRunner.jar [largeur] [hauteur] [perfect/imperfect] [simple/graph/optimized]");
+            error = "Erreur : Veuillez fournir une largeur et une hauteur valides supérieurs à 5";
         }
         catch (Exception ex) {
-            System.out.println("Erreur inattendue lors de la génération du labyrinthe. Veuillez réessayer. Utilisation : java -jar MazeRunner.jar [largeur] [hauteur] [perfect/imperfect] [simple/graph/optimized]");
+            error = "Erreur inattendue lors de la génération du labyrinthe. Veuillez réessayer.";
         }
 
 
@@ -26,29 +28,44 @@ public class Main {
             if (Objects.equals(type, "imperfect") && Objects.equals(methode, "simple")) {
                 SimpleImperfectMazeGenerator simpleImperfect = new SimpleImperfectMazeGenerator(largeur, hauteur);
                 simpleImperfect.getMaze();
+
             } else if (Objects.equals(type, "perfect") && Objects.equals(methode, "simple")) {
                 SimplePerfectMazeGenerator simplePerfect = new SimplePerfectMazeGenerator(largeur, hauteur);
                 simplePerfect.getMaze();
-//            } else if (Objects.equals(type, "imperfect") && Objects.equals(methode, "graph")) {
+
+            } else if (Objects.equals(type, "imperfect") && Objects.equals(methode, "graph")) {
+                GraphBasedMazeGenerator graph = new GraphBasedMazeGenerator(largeur, hauteur);
+                graph.getMaze();
+
+            } else if (Objects.equals(type, "perfect") && Objects.equals(methode, "graph")) {
 //                Maze.getSimpleImperfect(largeur, hauteur);
-//            } else if (Objects.equals(type, "perfect") && Objects.equals(methode, "graph")) {
+                error = "Erreur : Cette fonctionnalité n'est pas encore implémentée";
+
+            } else if (Objects.equals(type, "imperfect") && Objects.equals(methode, "optimized")) {
 //                Maze.getSimpleImperfect(largeur, hauteur);
-//            } else if (Objects.equals(type, "imperfect") && Objects.equals(methode, "optimized")) {
+                error = "Erreur : Cette fonctionnalité n'est pas encore implémentée";
+
+            } else if (Objects.equals(type, "perfect") && Objects.equals(methode, "optimized")) {
 //                Maze.getSimpleImperfect(largeur, hauteur);
-//            } else if (Objects.equals(type, "perfect") && Objects.equals(methode, "optimized")) {
-//                Maze.getSimpleImperfect(largeur, hauteur);
+                error = "Erreur : Cette fonctionnalité n'est pas encore implémentée";
+
             } else {
-                System.out.println("Erreur : Veuillez fournir un type de labyrinthe et une méthode de génération valides. Utilisation : java -jar MazeRunner.jar [largeur] [hauteur] [perfect/imperfect] [simple/graph/optimized]");
+                error = "Erreur : Veuillez fournir un type de labyrinthe et une méthode de génération valides.";
             }
 
         } else if (largeur < 5 || hauteur < 5) {
-            System.out.println("Erreur : Veuillez fournir une largeur et une hauteur valides supérieurs à 5. Utilisation : java -jar MazeRunner.jar [largeur] [hauteur] [perfect/imperfect] [simple/graph/optimized]");
+            error = "Erreur : Veuillez fournir une largeur et une hauteur valides supérieurs à 5";
         } else if (Objects.equals(args[2], "") || args[2].isEmpty() || Objects.equals(args[3], "") || args[3].isEmpty()) {
-            System.out.println("Erreur : Veuillez fournir un type de labyrinthe et une méthode de génération valides. Utilisation : java -jar MazeRunner.jar [largeur] [hauteur] [perfect/imperfect] [simple/graph/optimized]");
+            error = "Erreur : Veuillez fournir un type de labyrinthe et une méthode de génération valides.";
         } else if (!Objects.equals(type, "imperfect") && !Objects.equals(type, "perfect") || !Objects.equals(methode, "simple") && !Objects.equals(methode, "graph") && !Objects.equals(methode, "optimized")) {
-            System.out.println("Erreur : Veuillez fournir un type de labyrinthe et une méthode de génération valides. Utilisation : java -jar MazeRunner.jar [largeur] [hauteur] [perfect/imperfect] [simple/graph/optimized]");
+            error = "Erreur : Veuillez fournir un type de labyrinthe et une méthode de génération valides.";
         } else {
-            System.out.println("Erreur inattendue lors de la génération du labyrinthe. Veuillez réessayer. Utilisation : java -jar MazeRunner.jar [largeur] [hauteur] [perfect/imperfect] [simple/graph/optimized]");
+            error = "Erreur inattendue lors de la génération du labyrinthe. Veuillez réessayer.";
+        }
+
+        if (!Objects.equals(error, "")) {
+            System.out.println(error);
+            System.out.println("Utilisation : java -jar MazeRunner.jar [largeur] [hauteur] [perfect/imperfect] [simple/graph/optimized]");
         }
     }
 }

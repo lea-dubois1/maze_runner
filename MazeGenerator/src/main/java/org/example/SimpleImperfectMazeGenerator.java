@@ -12,20 +12,20 @@ public class SimpleImperfectMazeGenerator extends SimplePerfectMazeGenerator imp
         breakMoreThings();
         System.out.println();
         System.out.println();
-        displayMaze(tilesTab);
+        displayMaze(maze);
     }
 
     public void breakMoreThings() {
         breakThings();
 
-        displayMaze(tilesTab);
+        displayMaze(maze);
 
         int loops = 0;
 
-        while (!Objects.equals(loops, height / 2)) {
+        while (!Objects.equals(loops, height >> 2)) {
 
             int randomIndex = getRandomNum(num);
-            String[] tile = tilesTab[randomIndex];
+            String[] tile = maze[randomIndex];
             String[] otherTile;
             int direction = getRandomNum(4);
 
@@ -34,7 +34,7 @@ public class SimpleImperfectMazeGenerator extends SimplePerfectMazeGenerator imp
                 case 0 -> {         // NORTH
 
                     try {                                               // Vérifie si la case cherchée existe
-                        otherTile = tilesTab[randomIndex - width];
+                        otherTile = maze[randomIndex - width];
                     } catch (ArrayIndexOutOfBoundsException e) {
                         break;
                     }
@@ -49,7 +49,7 @@ public class SimpleImperfectMazeGenerator extends SimplePerfectMazeGenerator imp
                 case 1 -> {         // EAST
 
                     try {
-                        otherTile = tilesTab[randomIndex + 1];
+                        otherTile = maze[randomIndex + 1];
                     } catch (ArrayIndexOutOfBoundsException e) {
                         break;
                     }
@@ -65,7 +65,7 @@ public class SimpleImperfectMazeGenerator extends SimplePerfectMazeGenerator imp
                 case 2 -> {         // SOUTH
 
                     try {
-                        otherTile = tilesTab[randomIndex + width];
+                        otherTile = maze[randomIndex + width];
                     } catch (ArrayIndexOutOfBoundsException e) {
                         break;
                     }
@@ -80,7 +80,7 @@ public class SimpleImperfectMazeGenerator extends SimplePerfectMazeGenerator imp
                 case 3 -> {         // WEST
 
                     try {
-                        otherTile = tilesTab[randomIndex - 1];
+                        otherTile = maze[randomIndex - 1];
                     } catch (ArrayIndexOutOfBoundsException e) {
                         break;
                     }
