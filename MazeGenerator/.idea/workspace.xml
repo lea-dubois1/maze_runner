@@ -5,13 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9b6d7cfe-e836-4000-9ee9-c44eaaea31a2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/GraphBasedMazeGenerator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/GraphTiles.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/GraphBasedImperfectMazeGenerator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/GraphBasedMazeGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/GraphBasedMazeGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/GraphTiles.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/GraphTiles.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Maze.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Maze.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/SimpleImperfectMazeGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/SimpleImperfectMazeGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/SimplePerfectMazeGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/SimplePerfectMazeGenerator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,6 +116,8 @@
       <workItem from="1695971876038" duration="3936000" />
       <workItem from="1695978211816" duration="8832000" />
       <workItem from="1696353523484" duration="6091000" />
+      <workItem from="1696361884338" duration="648000" />
+      <workItem from="1696437568142" duration="4067000" />
     </task>
     <servers />
   </component>

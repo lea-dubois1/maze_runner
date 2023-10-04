@@ -37,7 +37,11 @@ public class GraphTiles {
         }
     }
 
-    public void changeCore() {
+    public void changeCoreEnd() {
         core = ".";
+    }
+
+    public void changeCoreNum(String numAfter) {
+        core = numAfter;
     }
 }

@@ -34,13 +34,12 @@ public class Main {
                 simplePerfect.getMaze();
 
             } else if (Objects.equals(type, "imperfect") && Objects.equals(methode, "graph")) {
-                GraphBasedMazeGenerator graph = new GraphBasedMazeGenerator(largeur, hauteur);
-                graph.getMaze();
+                GraphBasedImperfectMazeGenerator graphImperfect = new GraphBasedImperfectMazeGenerator(largeur, hauteur);
+                graphImperfect.getMaze();
 
             } else if (Objects.equals(type, "perfect") && Objects.equals(methode, "graph")) {
-//                Maze.getSimpleImperfect(largeur, hauteur);
-                error = "Erreur : Cette fonctionnalité n'est pas encore implémentée";
-
+                GraphBasedPerfectMazeGenerator graphPerfect = new GraphBasedPerfectMazeGenerator(largeur, hauteur);
+                graphPerfect.getMaze();
             } else if (Objects.equals(type, "imperfect") && Objects.equals(methode, "optimized")) {
 //                Maze.getSimpleImperfect(largeur, hauteur);
                 error = "Erreur : Cette fonctionnalité n'est pas encore implémentée";
